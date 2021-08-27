@@ -100,9 +100,18 @@ function greetingSelector(name,age,gender){
             "female":"Como esta Sra."
         }
     }
+    var greetings_by_time = {
+        0:"Buen día",
+        1:"Buenas tardes",
+        2:"Buena noche"
+    }
     var limits = [20,45]
     group = valueIntervalFinder(age,limits);
-    return greetings[group][gender] + " " + name
+    var current_time = new Date(); 
+    var time_limits = [new Date().setHours(12,0),new Date().setHours(18,0)]
+    time_group = valueIntervalFinder(current_time,time_limits)
+    alert(current_time)
+    return greetings[group][gender] + " " + name + ". "+greetings_by_time[time_group]+"."
 }
 
 form.addEventListener("submit",event=>{
