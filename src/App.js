@@ -2,7 +2,7 @@ const nombre = document.querySelector("#nombre-input");
 const edad = document.querySelector("#edad-input");
 const form = document.querySelector("#saludador-form");
 const genero = document.querySelector("#genero-input");
-
+const greeting_element = document.querySelector("#greeting");
 
 function isAnIndex(index,lenght){
     var ans = false;
@@ -12,56 +12,6 @@ function isAnIndex(index,lenght){
     return ans;
 }
 
-
-
-/*function valueIntervalFinder(value,array,iLim = Math.floor(array.length/2))
-{
-  var sLim = iLim + 1;
-  var interval;
-  console.log("["+iLim+","+sLim+"]")
-  if(value < array[0])
-  {
-    interval=0;
-  }
-  else if(value>array[array.length-1])
-  {
-    interval=array.length;
-  }
-  else if (array[iLim]<=value && value<=array[sLim])
-  {
-    interval = iLim+1;
-  }
-  else if (array[iLim]<=value)
-  {
-    iLim = iLim + 1;
-    interval = valueIntervalFinder(value,array,iLim);
-  }
-  else if (value<=array[sLim])
-  {
-    iLim = iLim - 1;
-    interval = valueIntervalFinder(value,array,iLim);
-  }
-  alert(iLim + " " + sLim)
-  return interval;
-}*/
-
-/*function selectorWithBoundaries(value,options, inferiorBoundaries){
-    var i = Math.floor(inferiorBoundaries/2);
-    
-        if(options[i]<value)
-        {
-            if(isAnIndex(i+1) && value<options[i+1])
-            {
-                optionWasSelected = true;
-            }else{
-                
-            }
-        }else {
-            i++;
-        }
-
-    return ;
-}*/
 function valueIntervalFinder(value,limits)
 {
     var interval;
@@ -110,11 +60,12 @@ function greetingSelector(name,age,gender){
     var current_time = new Date(); 
     var time_limits = [new Date().setHours(12,0),new Date().setHours(18,0)]
     time_group = valueIntervalFinder(current_time,time_limits)
-    alert(current_time)
+    //alert(current_time)
     return greetings[group][gender] + " " + name + ". "+greetings_by_time[time_group]+"."
 }
 
 form.addEventListener("submit",event=>{
-    greeting = greetingSelector(nombre.value,edad.value,genero.value)
-    alert(greeting);
+    event.preventDefault();
+    greeting_message = greetingSelector(nombre.value,edad.value,genero.value)
+    greeting_element.innerHTML = greeting_message;
 })
