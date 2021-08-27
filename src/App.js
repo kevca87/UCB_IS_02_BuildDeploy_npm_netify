@@ -1,6 +1,7 @@
 const nombre = document.querySelector("#nombre-input");
 const edad = document.querySelector("#edad-input");
 const form = document.querySelector("#saludador-form");
+const genero = document.querySelector("#genero-input");
 
 
 function isAnIndex(index,lenght){
@@ -10,6 +11,7 @@ function isAnIndex(index,lenght){
     }
     return ans;
 }
+
 
 
 /*function valueIntervalFinder(value,array,iLim = Math.floor(array.length/2))
@@ -85,16 +87,25 @@ function valueIntervalFinder(value,limits)
 }
 function greetingSelector(name,age,gender){
     var greetings = {
-        0:"Que tal",
-        1:"Hola",
-        2:"Como esta",
+        0:{
+            "male":"Hola amigo",
+            "female":"Hola amiga"
+        },
+        1:{
+            "male":"Que tal",
+            "female":"Que tal"
+        },
+        2:{
+            "male":"Como esta Don",
+            "female":"Como esta Sra."
+        }
     }
-    var limits = [10,25]
+    var limits = [20,45]
     group = valueIntervalFinder(age,limits);
-    return greetings[group] + " " + name
+    return greetings[group][gender] + " " + name
 }
 
 form.addEventListener("submit",event=>{
-    greeting = greetingSelector(nombre.value,edad.value,"masculino")
+    greeting = greetingSelector(nombre.value,edad.value,genero.value)
     alert(greeting);
 })
